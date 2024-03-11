@@ -1,4 +1,4 @@
-const z = require("zod");
+import z from "zod";
 const movieSchema = z.object({
     pelicula: z.string({
         invalid_type_error:"El nombre de la pelicula debe ser string",
@@ -11,10 +11,14 @@ const movieSchema = z.object({
         }
     ),
     recaudacion: z.string(),
+    year:z.number(),
 })
 
-function validateMovie(object) {
+export function validateMovie(object) {
     return movieSchema.safeParse(object);
 }
 
-module.exports= {validateMovie}
+export function validatePartialMovie(object){
+    return movieSchema.partial().safeParse(object)
+}
+
