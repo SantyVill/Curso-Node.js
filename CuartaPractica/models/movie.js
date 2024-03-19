@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import {createRequire} from 'node:module'
 const require = createRequire(import.meta.url)
-const movies = require('./movies.json')
+const movies = require('../movies.json')
 
 export class MovieModel {
 
@@ -10,15 +10,18 @@ export class MovieModel {
             const filterMovies = movies.filter(
                 movie => movie.genero.some(g => g.toLowerCase() === genero.toLowerCase())
             );
-            res.json(filterMovies);
+            return (filterMovies);
         }
+         return (movies);
     }
     static async getById({id}){
         const movie = movies.find(movie=> movie.id == id)
         return movie
     }
 
-    static async create({input}){
+    static async create(input){
+        console.log("input: ")
+        console.log(input)
         const newMovie = {
             id: randomUUID(),
             ...input
@@ -42,9 +45,9 @@ export class MovieModel {
     
         const updateMovie = {
             ...movies[movieIndex],
-            ...result.data
+            ...input
         }
-        
+        return(updateMovie);
         movies[movieIndex]=updateMovie
     }
 }

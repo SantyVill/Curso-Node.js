@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { randomUUID } from "node:crypto";
-import { validateMovie, validatePartialMovie } from "./Schema/movies.js";  // Cambiado a minúsculas
+/* import { validateMovie, validatePartialMovie } from "./Schema/movies.js"; */  // Cambiado a minúsculas
 import { MovieModel } from "../models/movie.js";
 import { MovieController } from "../controllers/movies.js";
 
@@ -18,7 +18,7 @@ moviesRouter.get("/:id", MovieController.getById);
     res.status(404).json({ message: "Movie not found" });
 }); */
 
-moviesRouter.post("/movies", MovieController.create);
+moviesRouter.post("/", MovieController.create);
 
 moviesRouter.delete("/:id",MovieController.delete);
 
